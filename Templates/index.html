@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Natal Chart Calculator</title>
+</head>
+<body>
+    <h1>Natal Chart Calculator</h1>
+    <form method="post">
+        <label>Date (YYYY-MM-DD): <input type="date" name="date" required></label><br><br>
+        <label>Time (HH:MM): <input type="time" name="time" required></label><br><br>
+        <label>Timezone (e.g., +10:00): <input type="text" name="timezone" value="+00:00" required></label><br><br>
+        <label>Latitude: <input type="text" name="latitude" placeholder="e.g. -37.81" required></label><br><br>
+        <label>Longitude: <input type="text" name="longitude" placeholder="e.g. 144.96" required></label><br><br>
+        <button type="submit">Calculate</button>
+    </form>
+
+    {% if chart %}
+        {% if chart.error %}
+            <p style="color:red;">Error: {{ chart.error }}</p>
+        {% else %}
+            <h2>Your Chart:</h2>
+            <ul>
+            {% for planet, sign in chart.items() %}
+                <li>{{ planet }} in {{ sign }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+</body>
+</html>
